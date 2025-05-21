@@ -1,6 +1,24 @@
-# 🪡 Gcomply &nbsp;[![License](https://badgen.net/npm/license/gcomply)](https://github.com/reececomo/gcomplyblob/main/LICENSE) [![Downloads per month](https://img.shields.io/npm/dm/gcomply.svg)](https://www.npmjs.com/package/gcomply) [![NPM version](https://img.shields.io/npm/v/gcomply.svg)](https://www.npmjs.com/package/gcomply)
+<h1 align="center">
+  🪡 GComply
+</h1>
 
-Create beautiful and natural-sounding text for users — via an ultra lightweight **automatic grammar agreement** engine.
+<p align="center">
+  Beautiful and natural-sounding text for <i>humans</i>.
+</p>
+
+<p align="center">
+  <a href="https://github.com/reececomo/gcomplyblob/main/LICENSE">
+    <img alt="License" src="https://badgen.net/npm/license/gcomply">
+  </a>
+  <a href="https://www.npmjs.com/package/gcomply">
+    <img alt="Downloads per month" src="https://img.shields.io/npm/dm/gcomply.svg">
+  </a>
+  <a href="https://www.npmjs.com/package/gcomply">
+    <img alt="NPM version" src="https://img.shields.io/npm/v/gcomply.svg">
+  </a>
+</p>
+
+<table align="center"><tr><td>
 
 ```ts
 `Add ${count} person(s) to group.`
@@ -10,237 +28,132 @@ g`Add ${count} person to group.`
 // "Add 2 people to group." ✅
 ```
 
-🗣️ Write language-aware interfaces that respect grammar rules in multiple languages.
+</td></tr></table>
+
+<p align="center">
+A lightweight <strong>automatic grammar agreement</strong> engine.
+</p>
 
 > [!CAUTION]
-> **Experimental**: This is an experimental API for automatic grammar agreement. Given
-> the complexities of linguistics, the goal is to offer an ultra lightweight and
-> extensible engine that can be tailored to specific domains and languages.
+> **Experimental**: This is an experimental API for automatic grammar agreement in
+> JavaScript/TypeScript.
 
-> [!IMPORTANT]
-> 📦 **Localization (l10n) support:** Coming soon - aiming to be completely tree shakable.
+## **🚀 Mission**
 
-## API
+**What it is:**
+Take the burden of grammar agreement in dynamic strings&mdash;such as pluralization
+and gender support&mdash;off developers. Improve user experience, simplify code, and
+improve localization support.
+
+**What it's not:**
+It is not perfect and complete language grammar support.
+
+<details><summary><h4>📘 Read more: Distinction from ICU Intl.MessageFormat</h4></summary>
+
+**Intl.MessageFormat** provides manual support for plural/selects. But it is entirely
+manual, and up to developers to predict all variance. It's also very challenging to
+correctly translate any string where a parameter (i.e. a noun) is interpolated.
+
+**Example:**
 
 ```ts
-g`${posts.length} new posts, ${friendRequests.length} new friend requests`;
-// "1 new post, 4 new friend requests"
+const notification = t("I was in {country}")
+// German: "Ich war in {country}"
 
-const text = inflect("5 new message");
-// "5 new messages"
+const switzerland = t("Switzerland")
+// German: "die Schweiz"
+
+notification.format({ country: switzerland })
+// "Ich war in die Schweiz" ❌
+
+// The feminine dative article is "der" (not 
+// "die") so it should instead be:
+// "Ich war in der Schweiz" ✅
 ```
 
-### Grammatical Agreement
+In this example if you supported 180+ countries, you might have a much bigger problem.
 
-Based off of the new automatic grammatical agreement APIs in [Swift](https://developer.apple.com/videos/play/wwdc2023/10153/).
+So to summarize, **ICU MessageFormat** is a great tool, but its focused primarily on a
+different problem.
 
-These are the Swift features:
+</details>
 
-| Implemented | Agreement Type | Proximity    | Code Changes | Description
-| --- | ---------------------- | ------------ | ------------ | ---
-| partial | `inflect`          | Immediate    | No           | Reference neighboring elements.
-| ❌ | `agreeWithArgument`     | Same string  | No           | Directly reference other elements in the strings.
-| ❌ | `agreeWithConcept`      | Detached     | Yes          | Agree with a `Concept` passed in via context.
+## ✨ Features
+
+- ⚡️ **Instant grammar agreement** — plurals, gender, articles, etc.
+- 📦 **Highly pluggable** — compatible with any other framework
+- 🌐 **Localizable** — add support for any natural language
+- 🪶 **Featherweight** — <1kB, zero dependencies
+
+Add custom transforms, domain terminology, nouns, pronouns, and more.
+
+## API Usage
+
+> [!NOTE]
+> **About Terminology:**
+>
+> Parts of the API terminology is modeled to be consistent with the emerging equivalent
+> Swift APIs for
+> [morphology](https://developer.apple.com/documentation/foundation/morphology)
+> and [inflection](https://developer.apple.com/videos/play/wwdc2023/10153/).
+>
+> Notably though, there is **no direct proxy** for Swift's
+> [AttributedString](https://developer.apple.com/documentation/foundation/attributedstring)
+> in JavaScript.
+
+### Inline &ndash; ``` g`` ```
+
+The `g` tagged template will coerce inline grammar
+(in accordance to any global options).
+
+```ts
+g`${viewsCount} new views, ${subsCount} new subscribers`;
+// "1 new view, 3 new subscribers"
+```
+
+### Inflect &ndash; `inflect()`
+
+The `g` tagged template is syntactic sugar for the `gcomply.inflect()` function;
+
+However&mdash;unlike `g`&mdash;`inflect()` may also be passed additional external
+options for grammatical agreement:
+
+```ts
+let text = "Votre conseiller est prêt."
+let options = {
+    language: "fr",
+    morphology: {
+        grammaticalGender: "feminine"
+    }
+}
+
+inflect(text)           // "Votre conseiller est prêt."
+inflect(text, options)  // "Votre conseillère est prête."
+```
+
+## Implementation status
+
+These are the Swift agreement features:
+
+| Status | Agreement Type | Methodology | Code Changes | Description
+| --- | ---------------------- | ----------------------- | ------------ | ---
+| partial | `inflect` | Proximity-based | No | Reference neighboring elements.
+| ❌ | `agreeWithArgument` | Explicit reference, same string | No | Directly reference other elements in the strings.
+| ❌ | `agreeWithConcept` | Explicit reference, injected | Yes | Agree with a `Concept` passed in via context.
 
 > [!NOTE]
 > **Source:** See [WWDC2023 @ 6:15](https://developer.apple.com/videos/play/wwdc2023/10153/)
 
-### Practical Examples
-
-> [!WARNING]
-> **Not implemented:** Not yet implemented!
-
-#### Grammatical Gender
-
-```ts
-inflect("Votre conseiller est prêt.").with({ grammarGender: "feminine" });
-// "Votre conseillère est prête."
-```
-
-Here's how it might look in ICU MessageFormat:
-
-```ts
-const text = new Intl.MessageFormat(`Su {
-    doctorGender, select,
-      female {doctora}
-      other  {doctor}
-} {
-    userGender, select,
-      female {la}
-      other  {lo}
-} verá mañana.`).format({
-  doctorGender: "female",
-  userGender: "male",
-});
-```
-
-```ts
-g`Votre conseiller est prêt.`.with({ grammaticalGender: "feminine" });
-// "Votre conseillère est prête."
-
-g`Su {
-    doctor_gender, select,
-    masculine {doctor}
-    feminine  {doctora}
-} {
-    user_gender, select,
-    masculine {lo}
-    feminine  {la}
-} verá mañana.`
-    .concepts([
-        termsOfAddress([doctor.grammaticalGender]),
-    ])
-// "Su doctora la verá mañana."
-
-g`"Su doctor lol verá mañana."`
-    .set({ grammaticalGender: "feminine" })
-    .set(1, { gender: null })
-// "Su doctora lo verá mañana."
-```
-
-
-## ✨ Features
-
-- 💬 **Automatic Grammar Agreement** — plurals, grammatical gender, articles
-- 🔧 **Manual inflection** — for nouns, verbs and more
-- 🌐 **Localization friendly** — leverage existing **Intl.MessageFormat** syntax
-- 📦 **Zero dependencies** — compatible with React, Vue, Svelte, `i18next`, `formatjs`, etc.
-
-> 🗣️ Write language-aware interfaces that respect grammar rules. Useful for i18n, content generation, conversational UI, and more.
-
----
-
-
-## 🚀 Getting Started
-
-### Installation
-
-```bash
-npm install gcomply
-
-yarn add gcomply
-```
-
-### Importing a Language Pack
-
-Languages are opt-in to reduce bundle size:
-
-```ts
-import { gcomply } from 'gcomply';
-import { enUS } from 'gcomplylang/en-US';
-
-const gcomply = new gcomply({ locale: enUS });
-```
-
----
-
-## 🧠 Core API
-
-### `inflect(template: string, context: GrammarContext): string`
-
-Use this to apply grammar agreement dynamically.
-
-#### Example
-
-```ts
-gcomply.inflect(
-  "The {author} {write|writes} a message.",
-  { number: "singular", person: "third" }
-);
-// → "The author writes a message."
-```
-
----
-
-## 🧩 API Reference
-
-### `GrammarContext`
-
-```ts
-type GrammarContext = {
-  person?: "first" | "second" | "third";
-  number?: "singular" | "plural";
-  gender?: "masculine" | "feminine" | "neutral";
-  formality?: "formal" | "informal"; // for supported locales
-};
-```
-
-### gcomply Class
-
-```ts
-new gcomply(options: {
-  locale: LocaleDefinition;
-});
-
-inflect(template: string, context: GrammarContext): string;
-```
-
----
-
-## 🌐 Supported Languages
-
-Initial support includes:
-
-| Language           | Code     |
-|--------------------|----------|
-| English (US)       | `en-US`  |
-| English (UK)       | `en-GB`  |
-| Spanish (Spain)    | `es`     |
-| Spanish (Mexico)   | `es-MX`  |
-
-To keep things efficient, **you must import the languages you use**.
-
-```ts
-import { esMX } from 'gcomplylang/es-MX';
-```
-
----
-
-## 🔌 Integrations (Coming Soon)
-
-- React bindings (`<Inflect />`, `useInflection`)
-- i18next plugin
-- CLI tools for devs
-
----
-
 ## 🛠️ Contributing
 
-We welcome contributions of:
+Contributions are welcome, such as:
 - New language packs
 - More granular inflection rules
 - Bug fixes and test cases
 - Integrations for other frameworks or i18n tools
 
-See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for details.
+> [!Important]
+> Keep in mind, the goal of this package is not to provide perfect and comprehensive
+> language support that covers all possible permutations out-of-the-box.
 
----
-
-## 📄 License
-
-MIT © 2025 [Your Name or Org]
-
----
-
-## 🙋 FAQ
-
-### Why only English and Spanish?
-We’re starting with widely spoken languages that show clear morphological variation. More languages can be added as opt-in modules. Contributions welcome!
-
-### How is this different from i18next plural/gender support?
-Most i18n libraries handle pluralization and basic gender, but not **morphological agreement** (e.g., verb conjugation or adjective/noun matching). gcomply fills that gap.
-
----
-
-## ⭐️ Star This Project
-
-If you find gcomply useful, give it a ⭐️ and help grow the community!
-
-### ICU syntax supported
-
-```ts
-g`{${count}, plural,
-  one   {New message in inbox.}
-  other {There are # new messages in your inbox.}}`;
-// "New message in inbox."
-```
+<!-- See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for details. -->
