@@ -1,0 +1,1 @@
+export { numberAgreement } from "./numberAgreement";
