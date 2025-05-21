@@ -3,51 +3,52 @@
 </h1>
 
 <p align="center">
-  Beautiful and natural-sounding text for <i>humans</i>.
+  Beautiful and natural-sounding text in human interfaces.
 </p>
 
 <p align="center">
-  <a href="https://github.com/reececomo/gcomplyblob/main/LICENSE">
-    <img alt="License" src="https://badgen.net/npm/license/gcomply">
-  </a>
-  <a href="https://www.npmjs.com/package/gcomply">
-    <img alt="Downloads per month" src="https://img.shields.io/npm/dm/gcomply.svg">
-  </a>
-  <a href="https://www.npmjs.com/package/gcomply">
-    <img alt="NPM version" src="https://img.shields.io/npm/v/gcomply.svg">
-  </a>
+  <a href="https://www.npmjs.com/package/gcomply"><!--
+  --><img alt="NPM version" src="https://img.shields.io/npm/v/gcomply.svg"><!--
+  --></a>
+  <a href="https://github.com/reececomo/gcomplyblob/main/LICENSE"><!--
+  --><img alt="License" src="https://badgen.net/npm/license/gcomply"><!--
+  --></a>
+  <a href="https://bundlephobia.com/package/gcomply"><!--
+  --><img alt="Minzipped size" src="https://badgen.net/bundlephobia/minzip/gcomply"><!--
+  --></a>
 </p>
 
-<table align="center"><tr><td>
-
+<table align="center"><tr><td align="left">
+  
 ```ts
-`Add ${count} person(s) to group.`
-// "Add 2 person(s) to group." ❌
+`Add ${count} person to group.`       
+// ❌ "Add 2 person to group."
 
 g`Add ${count} person to group.`
-// "Add 2 people to group." ✅
+// ✅ "Add 2 people to group."
 ```
 
 </td></tr></table>
 
 <p align="center">
-A lightweight <strong>automatic grammar agreement</strong> engine.
+Lightweight <strong>automatic grammar agreement</strong>.
 </p>
 
-> [!CAUTION]
-> **Experimental**: This is an experimental API for automatic grammar agreement in
-> JavaScript/TypeScript that relates to the ideals from Swift's new
-> [InflectionRule API](https://developer.apple.com/documentation/foundation/inflectionrule).
+> [!WARNING]
+> **Experimental**: This is an experimental JavaScript API for automatic grammar
+> agreement, modeled after the equivalent
+> [Swift API](https://developer.apple.com/documentation/foundation/inflectionrule).
 
 ## **🚀 Mission**
 
-✅ **What gcomply is:**
-Take the complexity of grammar agreement&mdash;such as pluralization
-and gender support&mdash;out of dynamic strings. Improve user experience, simplify code,
-and even improve localization quality.
+- ✅ **What it is:**
+A lightweight engine for automatic grammar agreement &ndash; scoped specifically for human
+interfaces in software products. Provide fast, automatic grammar agreement to cover ~99%
+of real-world cases. Take the edge-case handling out of UI.
 
-❌ **What gcomply is NOT:**
-Perfect and complete grammar correction for all languages.
+- ❌ **What it is NOT:**
+Perfect or feature-complete grammar correction, stemming/lemmatization, lexical analysis,
+or sentiment analysis. This package will never 
 
 <details><summary><h4>📘 Read more: Distinction from ICU Intl.MessageFormat</h4></summary>
 
@@ -84,7 +85,7 @@ different problem.
 - ⚡️ **Instant grammar agreement** — plurals, gender, articles, etc.
 - 📦 **Highly pluggable** — compatible with any other framework
 - 🌐 **Localizable** — add support for any natural language
-- 🪶 **Featherweight** — <1kB, zero dependencies
+- 🪶 **Lightweight** — <5kB, zero dependencies
 
 Add custom transforms, domain terminology, nouns, pronouns, and more.
 
