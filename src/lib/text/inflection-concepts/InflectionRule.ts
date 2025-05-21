@@ -1,4 +1,4 @@
-import { Morphology } from "../morphology/Morphology";
+import { Morphology } from "../../morphology/Morphology";
 
 /**
  * An inflection rule that performs automatic grammar agreement.
@@ -23,7 +23,7 @@ export class InflectionRule
      */
     public static canInflect(language: string): boolean
     {
-        return false; // TODO: implement?
+        return language.startsWith("en");
     }
 
     // ----- Initializers: -----

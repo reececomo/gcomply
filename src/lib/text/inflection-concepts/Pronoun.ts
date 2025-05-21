@@ -1,4 +1,4 @@
-import { Morphology } from "../morphology/Morphology";
+import { Morphology } from "../../morphology/Morphology";
 
 /**
  * A custom pronoun for referring to a third person.

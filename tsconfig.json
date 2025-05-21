@@ -8,6 +8,7 @@
     "lib": ["dom", "es2020"],
     "allowJs": false,
     "moduleResolution": "node",
+    "isolatedModules": true,
     "downlevelIteration": true,
     "declaration": true,
     "declarationMap": false,

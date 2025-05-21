@@ -1,5 +1,5 @@
 export {
-    InflectionConcept,
+    type InflectionConcept,
     localizedPhrase,
     termsOfAddress,
 } from "./InflectionConcept.js";

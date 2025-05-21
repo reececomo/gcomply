@@ -1,225 +1,472 @@
-declare enum Definiteness {
+declare const Definiteness: Codable<{
 	/** @example "the" */
-	definite = "definite",
+	readonly definite: 1;
 	/** @example "a", "some" */
-	indefinite = "indefinite"
-}
-declare enum Determination {
+	readonly indefinite: 2;
+}, "definite" | "indefinite">;
+declare const Determination: Codable<{
 	/**
 	 * The determiner modifies or accompanies a noun within the noun phrase. It
 	 * cannot stand alone as a full noun phrase without the noun.
 	 *
 	 * @example "[My] car.", "[This] book."
 	 */
-	dependent = "dependent",
+	readonly dependent: 1;
 	/**
 	 * The determiner functions on its own, effectively standing in for a full
 	 * noun phrase.
 	 *
 	 * @example "That is [hers].", "I want [those]."
 	 */
-	independent = "independent"
-}
-declare enum GrammaticalCase {
+	readonly independent: 2;
+}, "dependent" | "independent">;
+declare const GrammaticalCase: Codable<{
 	/**
 	 * Expresses movement away from something.
 	 * @example "from the house"
 	 */
-	ablative = "ablative",
+	readonly ablative: 1;
 	/**
 	 * Marks the direct object of a verb.
 	 * @example "I see the car"
 	 */
-	accusative = "accusative",
+	readonly accusative: 2;
 	/**
 	 * Denotes presence at a location, often used in Uralic languages.
 	 * @example "at the station"
 	 */
-	adessive = "adessive",
+	readonly adessive: 3;
 	/**
 	 * Expresses motion toward something.
 	 * @example "to the house"
 	 */
-	allative = "allative",
+	readonly allative: 4;
 	/**
 	 * Marks the indirect object or recipient.
 	 * @example "I gave the book to her"
 	 */
-	dative = "dative",
+	readonly dative: 5;
 	/**
 	 * Indicates motion out of or from within.
 	 * @example "out of the room"
 	 */
-	elative = "elative",
+	readonly elative: 6;
 	/**
 	 * Indicates a temporary or current state.
 	 * @example "as a teacher"
 	 */
-	essive = "essive",
+	readonly essive: 7;
 	/**
 	 * Shows possession or relationship.
 	 * @example "the boy's dog"
 	 */
-	genitive = "genitive",
+	readonly genitive: 8;
 	/**
 	 * Expresses motion into something.
 	 * @example "into the house"
 	 */
-	illative = "illative",
+	readonly illative: 9;
 	/**
 	 * Denotes being inside something.
 	 * @example "in the room"
 	 */
-	inessive = "inessive",
+	readonly inessive: 10;
 	/**
 	 * Marks location or position.
 	 * @example "on the table"
 	 */
-	locative = "locative",
+	readonly locative: 11;
 	/**
 	 * Marks the subject of a sentence.
 	 * @example "The cat sleeps"
 	 */
-	nominative = "nominative",
+	readonly nominative: 12;
 	/**
 	 * Often used with prepositions to show location or topic.
 	 * @example "about the war"
 	 */
-	prepositional = "prepositional",
+	readonly prepositional: 13;
 	/**
 	 * Indicates a change of state or becoming something.
 	 * @example "became a leader"
 	 */
-	translative = "translative"
-}
-declare enum GrammaticalGender {
-	/** The feminine grammatical gender. */
-	feminine = "feminine",
-	/** The masculine grammatical gender. */
-	masculine = "masculine",
-	/** Do not specify gender when inflecting a string. */
-	neuter = "other"
-}
-declare enum GrammaticalNumber {
-	/** Zero persons or things. */
-	zero = "zero",
-	/** A single person or thing. */
-	singular = "one",
-	/** Two persons or things. */
-	pluralTwo = "two",
-	/** A small number of persons or things. */
-	pluralFew = "few",
-	/** A large number of persons or things. */
-	pluralMany = "many",
-	/** Multiple persons or things. */
-	plural = "other"
-}
-declare enum GrammaticalPerson {
+	readonly translative: 14;
+}, "ablative" | "accusative" | "adessive" | "allative" | "dative" | "elative" | "essive" | "genitive" | "illative" | "inessive" | "locative" | "nominative" | "prepositional" | "translative">;
+declare const GrammaticalGender: Codable<{
+	/**
+	 * The feminine grammatical gender.
+	 */
+	readonly feminine: 1;
+	/**
+	 * The masculine grammatical gender.
+	 */
+	readonly masculine: 2;
+	/**
+	 * Do not specify gender when inflecting a string.
+	 */
+	readonly neuter: 3;
+}, "feminine" | "masculine" | "neuter">;
+declare const GrammaticalNumber: Codable<typeof enumGrammaticalNumber, EncodedGrammaticalNumber>;
+declare const GrammaticalPerson: Codable<{
 	/**
 	 * Referring to the speaker or group including the speaker.
 	 * @example "I", "we"
 	 */
-	first = "first",
+	readonly first: 1;
 	/**
 	 * Referring to the person being spoken to.
 	 * @example "you"
 	 */
-	second = "second",
+	readonly second: 2;
 	/**
 	 * Referring to someone or something being spoken about.
 	 * @example "he", "she", "they"
 	 */
-	third = "third"
-}
-declare enum PartOfSpeech {
-	/**
-	 * Words that describe or modify nouns.
-	 * @example "red", "beautiful", "large"
-	 */
-	adjective = "adjective",
-	/**
-	 * Words that express actions, events, or states of being.
-	 * @example "run", "is", "seem"
-	 */
-	verb = "verb",
-	/**
-	 * Words that identify people, places, things, or concepts.
-	 * @example "cat", "city", "freedom"
-	 */
-	noun = "noun",
+	readonly third: 3;
+}, "first" | "second" | "third">;
+declare const PartOfSpeech: Codable<{
 	/**
 	 * Words that introduce and modify nouns (such as indefinite articles).
 	 * @example "the", "a", "this"
 	 */
-	determiner = "determiner",
+	readonly determiner: 1;
 	/**
 	 * Words that take the place of nouns.
 	 * @example "he", "she", "they", "it"
 	 */
-	pronoun = "pronoun",
+	readonly pronoun: 2;
 	/**
 	 * Individual alphabetic characters, used symbolically or phonetically.
 	 * @example "A", "b", "z"
 	 */
-	letter = "letter",
+	readonly letter: 3;
 	/**
 	 * Words that modify verbs, adjectives, or other adverbs.
 	 * @example "quickly", "very", "always"
 	 */
-	adverb = "adverb",
+	readonly adverb: 4;
 	/**
 	 * Function words often forming part of phrasal verbs or adding grammatical nuance.
 	 * @example "up" (as in "give up"), "out" (as in "find out")
 	 */
-	particle = "particle",
+	readonly particle: 5;
 	/**
-	 * Words that show relationships between elements, including prepositions and postpositions.
+	 * Words that describe or modify nouns.
+	 * @example "red", "beautiful", "large"
+	 */
+	readonly adjective: 6;
+	/**
+	 * Words that show relationships between elements, including prepositions and
+	 * postpositions.
 	 * @example "on", "under", "beside"
 	 */
-	adposition = "adposition",
+	readonly adposition: 7;
+	/**
+	 * Words that express actions, events, or states of being.
+	 * @example "run", "is", "seem"
+	 */
+	readonly verb: 8;
+	/**
+	 * Words that identify people, places, things, or concepts.
+	 * @example "cat", "city", "freedom"
+	 */
+	readonly noun: 9;
 	/**
 	 * Words that link clauses, phrases, or words.
 	 * @example "and", "but", "because"
 	 */
-	conjunction = "conjunction",
+	readonly conjunction: 10;
 	/**
 	 * Words that represent numbers or order.
 	 * @example "one", "second", "forty"
 	 */
-	numeral = "numeral",
+	readonly numeral: 11;
 	/**
 	 * Words or sounds that express emotion or sudden reaction.
 	 * @example "wow", "oops", "hey"
 	 */
-	interjection = "interjection",
+	readonly interjection: 12;
 	/**
 	 * A type of adposition placed before a noun to show relationship.
 	 * @example "in", "by", "at"
 	 */
-	preposition = "preposition",
+	readonly preposition: 13;
 	/**
 	 * Shortened forms of words or phrases.
 	 * @example "Dr.", "etc.", "UN"
 	 */
-	abbreviation = "abbreviation"
-}
-declare enum PronounType {
+	readonly abbreviation: 14;
+}, "determiner" | "pronoun" | "letter" | "adverb" | "particle" | "adjective" | "adposition" | "verb" | "noun" | "conjunction" | "numeral" | "interjection" | "preposition" | "abbreviation">;
+declare const PronounType: Codable<{
 	/**
 	 * Refers directly to a person or thing.
 	 * @example "I", "you", "they"
 	 */
-	personal = "personal",
+	readonly personal: 1;
 	/**
 	 * Indicates possession.
 	 * @example "my", "your", "their"
 	 */
-	possessive = "possessive",
+	readonly possessive: 2;
 	/**
 	 * Refers back to the subject of the clause.
 	 * @example "myself", "yourself", "themselves"
 	 */
-	reflexive = "reflexive"
-}
+	readonly reflexive: 3;
+}, "personal" | "possessive" | "reflexive">;
+declare const enumDefiniteness: {
+	/** @example "the" */
+	readonly definite: 1;
+	/** @example "a", "some" */
+	readonly indefinite: 2;
+};
+declare const enumDetermination: {
+	/**
+	 * The determiner modifies or accompanies a noun within the noun phrase. It
+	 * cannot stand alone as a full noun phrase without the noun.
+	 *
+	 * @example "[My] car.", "[This] book."
+	 */
+	readonly dependent: 1;
+	/**
+	 * The determiner functions on its own, effectively standing in for a full
+	 * noun phrase.
+	 *
+	 * @example "That is [hers].", "I want [those]."
+	 */
+	readonly independent: 2;
+};
+declare const enumGrammaticalCase: {
+	/**
+	 * Expresses movement away from something.
+	 * @example "from the house"
+	 */
+	readonly ablative: 1;
+	/**
+	 * Marks the direct object of a verb.
+	 * @example "I see the car"
+	 */
+	readonly accusative: 2;
+	/**
+	 * Denotes presence at a location, often used in Uralic languages.
+	 * @example "at the station"
+	 */
+	readonly adessive: 3;
+	/**
+	 * Expresses motion toward something.
+	 * @example "to the house"
+	 */
+	readonly allative: 4;
+	/**
+	 * Marks the indirect object or recipient.
+	 * @example "I gave the book to her"
+	 */
+	readonly dative: 5;
+	/**
+	 * Indicates motion out of or from within.
+	 * @example "out of the room"
+	 */
+	readonly elative: 6;
+	/**
+	 * Indicates a temporary or current state.
+	 * @example "as a teacher"
+	 */
+	readonly essive: 7;
+	/**
+	 * Shows possession or relationship.
+	 * @example "the boy's dog"
+	 */
+	readonly genitive: 8;
+	/**
+	 * Expresses motion into something.
+	 * @example "into the house"
+	 */
+	readonly illative: 9;
+	/**
+	 * Denotes being inside something.
+	 * @example "in the room"
+	 */
+	readonly inessive: 10;
+	/**
+	 * Marks location or position.
+	 * @example "on the table"
+	 */
+	readonly locative: 11;
+	/**
+	 * Marks the subject of a sentence.
+	 * @example "The cat sleeps"
+	 */
+	readonly nominative: 12;
+	/**
+	 * Often used with prepositions to show location or topic.
+	 * @example "about the war"
+	 */
+	readonly prepositional: 13;
+	/**
+	 * Indicates a change of state or becoming something.
+	 * @example "became a leader"
+	 */
+	readonly translative: 14;
+};
+declare const enumGrammaticalGender: {
+	/**
+	 * The feminine grammatical gender.
+	 */
+	readonly feminine: 1;
+	/**
+	 * The masculine grammatical gender.
+	 */
+	readonly masculine: 2;
+	/**
+	 * Do not specify gender when inflecting a string.
+	 */
+	readonly neuter: 3;
+};
+declare const enumGrammaticalNumber: {
+	/**
+	 * A single person or thing.
+	 *
+	 * Encoded value: "one"
+	 */
+	readonly singular: 1;
+	/**
+	 * Zero persons or things.
+	 *
+	 * Encoded value: "zero"
+	 */
+	readonly zero: 2;
+	/**
+	 * Multiple persons or things.
+	 *
+	 * Encoded value: "other"
+	 */
+	readonly plural: 3;
+	/**
+	 * Two persons or things.
+	 *
+	 * Encoded value: "two"
+	 */
+	readonly pluralTwo: 4;
+	/**
+	 * A small number of persons or things.
+	 *
+	 * Encoded value: "few"
+	 */
+	readonly pluralFew: 5;
+	/**
+	 * A large number of persons or things.
+	 *
+	 * Encoded value: "many"
+	 */
+	readonly pluralMany: 6;
+};
+declare const enumGrammaticalPerson: {
+	/**
+	 * Referring to the speaker or group including the speaker.
+	 * @example "I", "we"
+	 */
+	readonly first: 1;
+	/**
+	 * Referring to the person being spoken to.
+	 * @example "you"
+	 */
+	readonly second: 2;
+	/**
+	 * Referring to someone or something being spoken about.
+	 * @example "he", "she", "they"
+	 */
+	readonly third: 3;
+};
+declare const enumPartOfSpeech: {
+	/**
+	 * Words that introduce and modify nouns (such as indefinite articles).
+	 * @example "the", "a", "this"
+	 */
+	readonly determiner: 1;
+	/**
+	 * Words that take the place of nouns.
+	 * @example "he", "she", "they", "it"
+	 */
+	readonly pronoun: 2;
+	/**
+	 * Individual alphabetic characters, used symbolically or phonetically.
+	 * @example "A", "b", "z"
+	 */
+	readonly letter: 3;
+	/**
+	 * Words that modify verbs, adjectives, or other adverbs.
+	 * @example "quickly", "very", "always"
+	 */
+	readonly adverb: 4;
+	/**
+	 * Function words often forming part of phrasal verbs or adding grammatical nuance.
+	 * @example "up" (as in "give up"), "out" (as in "find out")
+	 */
+	readonly particle: 5;
+	/**
+	 * Words that describe or modify nouns.
+	 * @example "red", "beautiful", "large"
+	 */
+	readonly adjective: 6;
+	/**
+	 * Words that show relationships between elements, including prepositions and
+	 * postpositions.
+	 * @example "on", "under", "beside"
+	 */
+	readonly adposition: 7;
+	/**
+	 * Words that express actions, events, or states of being.
+	 * @example "run", "is", "seem"
+	 */
+	readonly verb: 8;
+	/**
+	 * Words that identify people, places, things, or concepts.
+	 * @example "cat", "city", "freedom"
+	 */
+	readonly noun: 9;
+	/**
+	 * Words that link clauses, phrases, or words.
+	 * @example "and", "but", "because"
+	 */
+	readonly conjunction: 10;
+	/**
+	 * Words that represent numbers or order.
+	 * @example "one", "second", "forty"
+	 */
+	readonly numeral: 11;
+	/**
+	 * Words or sounds that express emotion or sudden reaction.
+	 * @example "wow", "oops", "hey"
+	 */
+	readonly interjection: 12;
+	/**
+	 * A type of adposition placed before a noun to show relationship.
+	 * @example "in", "by", "at"
+	 */
+	readonly preposition: 13;
+	/**
+	 * Shortened forms of words or phrases.
+	 * @example "Dr.", "etc.", "UN"
+	 */
+	readonly abbreviation: 14;
+};
+declare const enumPronounType: {
+	/**
+	 * Refers directly to a person or thing.
+	 * @example "I", "you", "they"
+	 */
+	readonly personal: 1;
+	/**
+	 * Indicates possession.
+	 * @example "my", "your", "their"
+	 */
+	readonly possessive: 2;
+	/**
+	 * Refers back to the subject of the clause.
+	 * @example "myself", "yourself", "themselves"
+	 */
+	readonly reflexive: 3;
+};
 /**
  * An inflection rule that performs automatic grammar agreement.
  *
@@ -356,21 +603,21 @@ export interface LocalizationOptions {
  */
 export interface Morphology {
 	/** Indicates whether the referent is identifiable and specific. */
-	definiteness?: Grammar.DefinitenessLiteral;
+	definiteness?: Grammar.Definiteness;
 	/** Indicates the behavior of a determiner in relation to a noun. */
-	determination?: Grammar.DeterminationLiteral;
+	determination?: Grammar.Determination;
 	/** Indicates the role of a noun or pronoun in a sentence. */
-	grammaticalCase?: Grammar.GrammaticalCaseLiteral;
+	grammaticalCase?: Grammar.GrammaticalCase;
 	/** Indicates the grammatical gender of a noun. */
-	grammaticalGender?: Grammar.GrammaticalGenderLiteral;
+	grammaticalGender?: Grammar.GrammaticalGender;
 	/** Indicates the grammatical persons in verb conjugation and pronoun usage. */
-	grammaticalPerson?: Grammar.GrammaticalPersonLiteral;
+	grammaticalPerson?: Grammar.GrammaticalPerson;
 	/** Indicates the grammatical number or plurality of a thing. */
-	number?: Grammar.GrammaticalNumberLiteral;
+	number?: Grammar.GrammaticalNumber;
 	/** Indicates the grammatical part of speech. */
-	partOfSpeech?: Grammar.PartOfSpeechLiteral;
+	partOfSpeech?: Grammar.PartOfSpeech;
 	/** Indicates the grammatical function of pronouns. */
-	pronounType?: Grammar.PronounTypeLiteral;
+	pronounType?: Grammar.PronounType;
 }
 /**
  * A custom pronoun for referring to a third person.
@@ -383,26 +630,36 @@ export interface Pronoun {
 	/** The dependent morphology of the pronoun form. */
 	dependentMorphology?: Morphology;
 }
-export type DefinitenessLiteral = `${Definiteness}`;
-export type DeterminationLiteral = `${Determination}`;
-export type GrammaticalCaseLiteral = `${GrammaticalCase}`;
-export type GrammaticalGenderLiteral = `${GrammaticalGender}`;
-export type GrammaticalNumberLiteral = `${GrammaticalNumber}`;
-export type GrammaticalPersonLiteral = `${GrammaticalPerson}`;
+export type Codable<E extends IntEnumLike, StringValue = keyof E> = E & {
+	/**
+	 * @throws invalid value
+	 */
+	init(encoded: StringValue): E[keyof E];
+	encode(value: E[keyof E]): StringValue;
+};
+export type Definiteness = ValueOf<typeof enumDefiniteness>;
+export type Determination = ValueOf<typeof enumDetermination>;
+export type EncodedGrammaticalNumber = "one" | "zero" | "other" | "two" | "few" | "many";
+export type GrammaticalCase = ValueOf<typeof enumGrammaticalCase>;
+export type GrammaticalGender = ValueOf<typeof enumGrammaticalGender>;
+export type GrammaticalNumber = ValueOf<typeof enumGrammaticalNumber>;
+export type GrammaticalPerson = ValueOf<typeof enumGrammaticalPerson>;
 export type InflectionConcept = LocalizedPhraseConcept | TermsOfAddressConcept;
+export type IntEnumLike = Record<string, number>;
 export type LocalizedPhraseConcept = {
 	localizedPhrase: LocalizedPhraseValue;
 };
 export type LocalizedPhraseValue = string;
-export type PartOfSpeechLiteral = `${PartOfSpeech}`;
-export type PronounTypeLiteral = `${PronounType}`;
+export type PartOfSpeech = ValueOf<typeof enumPartOfSpeech>;
+export type PronounType = ValueOf<typeof enumPronounType>;
 export type TermsOfAddressConcept = {
 	termsOfAddress: TermsOfAddressValue;
 };
 export type TermsOfAddressValue = TermOfAddress[];
+export type ValueOf<T> = T[keyof T];
 
 declare namespace Grammar {
-	export { Definiteness, DefinitenessLiteral, Determination, DeterminationLiteral, GrammaticalCase, GrammaticalCaseLiteral, GrammaticalGender, GrammaticalGenderLiteral, GrammaticalNumber, GrammaticalNumberLiteral, GrammaticalPerson, GrammaticalPersonLiteral, PartOfSpeech, PartOfSpeechLiteral, PronounType, PronounTypeLiteral };
+	export { Definiteness, Determination, GrammaticalCase, GrammaticalGender, GrammaticalNumber, GrammaticalPerson, PartOfSpeech, PronounType, enumGrammaticalCase };
 }
 
 export {

@@ -6,27 +6,27 @@ import * as Grammar from "./grammar/index.js";
  */
 export interface Morphology
 {
-  /** Indicates whether the referent is identifiable and specific. */
-  definiteness?: Grammar.DefinitenessLiteral;
+    /** Indicates whether the referent is identifiable and specific. */
+    definiteness?: Grammar.Definiteness;
 
-  /** Indicates the behavior of a determiner in relation to a noun. */
-  determination?: Grammar.DeterminationLiteral;
+    /** Indicates the behavior of a determiner in relation to a noun. */
+    determination?: Grammar.Determination;
 
-  /** Indicates the role of a noun or pronoun in a sentence. */
-  grammaticalCase?: Grammar.GrammaticalCaseLiteral;
+    /** Indicates the role of a noun or pronoun in a sentence. */
+    grammaticalCase?: Grammar.GrammaticalCase;
 
-  /** Indicates the grammatical gender of a noun. */
-  grammaticalGender?: Grammar.GrammaticalGenderLiteral;
+    /** Indicates the grammatical gender of a noun. */
+    grammaticalGender?: Grammar.GrammaticalGender;
 
-  /** Indicates the grammatical persons in verb conjugation and pronoun usage. */
-  grammaticalPerson?: Grammar.GrammaticalPersonLiteral;
+    /** Indicates the grammatical persons in verb conjugation and pronoun usage. */
+    grammaticalPerson?: Grammar.GrammaticalPerson;
 
-  /** Indicates the grammatical number or plurality of a thing. */
-  number?: Grammar.GrammaticalNumberLiteral;
+    /** Indicates the grammatical number or plurality of a thing. */
+    number?: Grammar.GrammaticalNumber;
 
-  /** Indicates the grammatical part of speech. */
-  partOfSpeech?: Grammar.PartOfSpeechLiteral;
+    /** Indicates the grammatical part of speech. */
+    partOfSpeech?: Grammar.PartOfSpeech;
 
-  /** Indicates the grammatical function of pronouns. */
-  pronounType?: Grammar.PronounTypeLiteral;
+    /** Indicates the grammatical function of pronouns. */
+    pronounType?: Grammar.PronounType;
 }

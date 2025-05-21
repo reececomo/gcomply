@@ -1,6 +1,6 @@
 {
   "name": "gcomply",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Lightweight automatic grammar agreement engine for JavaScript/TypeScript",
   "author": "Reece Como <reece.como@gmail.com>",
   "license": "MIT",

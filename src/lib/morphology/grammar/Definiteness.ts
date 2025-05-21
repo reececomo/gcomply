@@ -1,15 +1,18 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
-/**
- * Indicates whether a referent is identifiable and specific.
- */
-export enum Definiteness
+import { codable, ValueOf } from "../../../lib/utils";
+
+const enumDefiniteness =
 {
-  /** @example "the" */
-  definite = "definite",
+    /** @example "the" */
+    definite: 1,
 
-  /** @example "a", "some" */
-  indefinite = "indefinite",
-}
+    /** @example "a", "some" */
+    indefinite: 2,
+} as const;
 
-export type DefinitenessLiteral = `${Definiteness}`;
+/**
+ * Indicates whether a referent article is identifiable and specific.
+ */
+export const Definiteness = codable(enumDefiniteness);
+export type Definiteness = ValueOf<typeof enumDefiniteness>;
