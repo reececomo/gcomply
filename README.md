@@ -36,17 +36,18 @@ A lightweight <strong>automatic grammar agreement</strong> engine.
 
 > [!CAUTION]
 > **Experimental**: This is an experimental API for automatic grammar agreement in
-> JavaScript/TypeScript.
+> JavaScript/TypeScript that relates to the ideals from Swift's new
+> [InflectionRule API](https://developer.apple.com/documentation/foundation/inflectionrule).
 
 ## **🚀 Mission**
 
-**What it is:**
-Take the burden of grammar agreement in dynamic strings&mdash;such as pluralization
-and gender support&mdash;off developers. Improve user experience, simplify code, and
-improve localization support.
+✅ **What gcomply is:**
+Take the complexity of grammar agreement&mdash;such as pluralization
+and gender support&mdash;out of dynamic strings. Improve user experience, simplify code,
+and even improve localization quality.
 
-**What it's not:**
-It is not perfect and complete language grammar support.
+❌ **What gcomply is NOT:**
+Perfect and complete grammar correction for all languages.
 
 <details><summary><h4>📘 Read more: Distinction from ICU Intl.MessageFormat</h4></summary>
 
@@ -89,8 +90,46 @@ Add custom transforms, domain terminology, nouns, pronouns, and more.
 
 ## API Usage
 
+### Simple usage
+
+- Syntax: ``` g`` ```
+
+The `g` tagged template will coerce inline grammar
+(in accordance to any global options).
+
+```ts
+import { g } from "gcomply";
+
+let views = content.viewCount,
+    shares = content.shareCount
+
+let text = g`${views} new views, ${shares} new shares`
+// "35 new views, 1 new share"
+```
+
+### Complex grammar
+
+- Syntax: `inflect(text, options?)` 
+
+The `inflect()` function provides a little more flexibility for complex
+grammatical agreement, and may also be passed additional external options:
+
+```ts
+import { inflect } from "gcomply";
+
+let text = "Votre conseiller est prêt."
+
+let opts = {
+    language: "fr",
+    morphology: { grammaticalGender: "feminine" }
+}
+
+inflect(text)        // "Votre conseiller est prêt."
+inflect(text, opts)  // "Votre conseillère est prête."
+```
+
 > [!NOTE]
-> **About Terminology:**
+> **Terminology:**
 >
 > Parts of the API terminology is modeled to be consistent with the emerging equivalent
 > Swift APIs for
@@ -100,36 +139,6 @@ Add custom transforms, domain terminology, nouns, pronouns, and more.
 > Notably though, there is **no direct proxy** for Swift's
 > [AttributedString](https://developer.apple.com/documentation/foundation/attributedstring)
 > in JavaScript.
-
-### Inline &ndash; ``` g`` ```
-
-The `g` tagged template will coerce inline grammar
-(in accordance to any global options).
-
-```ts
-g`${viewsCount} new views, ${subsCount} new subscribers`;
-// "1 new view, 3 new subscribers"
-```
-
-### Inflect &ndash; `inflect()`
-
-The `g` tagged template is syntactic sugar for the `gcomply.inflect()` function;
-
-However&mdash;unlike `g`&mdash;`inflect()` may also be passed additional external
-options for grammatical agreement:
-
-```ts
-let text = "Votre conseiller est prêt."
-let options = {
-    language: "fr",
-    morphology: {
-        grammaticalGender: "feminine"
-    }
-}
-
-inflect(text)           // "Votre conseiller est prêt."
-inflect(text, options)  // "Votre conseillère est prête."
-```
 
 ## Implementation status
 
