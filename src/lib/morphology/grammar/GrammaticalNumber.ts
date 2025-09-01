@@ -67,8 +67,8 @@ GrammaticalNumber.init = (value: EncodedGrammaticalNumber): GrammaticalNumber =>
     switch (value)
     {
         case "one"   : return GrammaticalNumber.singular;
-        case "zero"       : return GrammaticalNumber.zero;
-        case "other"     : return GrammaticalNumber.plural;
+        case "zero"  : return GrammaticalNumber.zero;
+        case "other" : return GrammaticalNumber.plural;
         case "two"  : return GrammaticalNumber.pluralTwo;
         case "few"  : return GrammaticalNumber.pluralFew;
         case "many" : return GrammaticalNumber.pluralMany;

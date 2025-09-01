@@ -1,3 +1,29 @@
+declare class LanguagePluralTable {
+	private keys;
+	private tags;
+	private matcher;
+	private nextId;
+	private one;
+	private other;
+	private zero;
+	private two;
+	private few;
+	private many;
+	private tables;
+	constructor();
+	test(value: string, requiredTag?: Grammar.PartOfSpeech): boolean;
+	getReplaceablePortion(token: string): string;
+	replace(token: string, plurality: Grammar.GrammaticalNumber): string;
+	addTagged(tag?: Grammar.PartOfSpeech, ...data: PluralEntry[]): this;
+	add(...data: PluralEntry[]): this;
+	private lookup;
+	private getTable;
+}
+declare class PluralManager {
+	private data;
+	add(lang: string, ...data: PluralEntry[]): this;
+	forLang(lang: string): LanguagePluralTable;
+}
 declare const Definiteness: Codable<{
 	/** @example "the" */
 	readonly definite: 1;
@@ -576,6 +602,7 @@ export declare class TermOfAddress {
 	readonly pronouns?: Pronoun[];
 	private constructor();
 }
+export declare const Plurals: PluralManager;
 /**
  * @example
  *  g`You have ${count} new message.`
@@ -638,6 +665,14 @@ export interface Morphology {
 	partOfSpeech?: Grammar.PartOfSpeech;
 	/** Indicates the grammatical function of pronouns. */
 	pronounType?: Grammar.PronounType;
+}
+export interface PluralEntry {
+	zero?: string;
+	one?: string;
+	other?: string;
+	two?: string;
+	few?: string;
+	many?: string;
 }
 /**
  * A custom pronoun for referring to a third person.

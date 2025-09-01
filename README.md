@@ -80,6 +80,19 @@ different problem.
 
 </details>
 
+### Add plurals
+
+```ts
+import { Plurals } from "gcomply";
+
+Plurals.getLang("en")
+  .add({ one: "tweet", other: "tweets" })
+  .add(...[
+    { one: "sausage", other: "sausages" },
+    { one: "twist", other: "twists" },
+  ]);
+```
+
 ## ✨ Features
 
 - ⚡️ **Instant grammar agreement** — plurals, gender, articles, etc.

@@ -1,4 +1,4 @@
-import * as Grammar from "./grammar/index.js";
+import * as Grammar from "./grammar/index";
 
 /**
  * Describes the morphological and grammatical features of a phrase or token group,

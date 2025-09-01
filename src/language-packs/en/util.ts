@@ -1,4 +1,4 @@
-const SENTENCE_PATTERN = /(.*?)(\. |\n|$)/g;
+const SENTENCE_PATTERN = /(.*?)(\. |, |\n|$)/g;
 
 export function processSentences(
     input: string,

@@ -52,6 +52,14 @@ describe( "numberAgreement", () =>
             "1 new message, 3 new friend requests"
         ],
         [
+            "1 new messages, 3 new friend request",
+            "1 new message, 3 new friend requests"
+        ],
+        [
+            "1 new message, 3 new friend request",
+            "1 new message, 3 new friend requests"
+        ],
+        [
             "You have 1 new post and 1 new friend requests",
             "You have 1 new post and 1 new friend request"
         ],

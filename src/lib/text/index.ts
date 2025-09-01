@@ -1,2 +1,2 @@
-export { type LocalizationOptions } from "../../LocalizationOptions.js";
-export * from "./inflect.js";
+export { type LocalizationOptions } from "../../LocalizationOptions";
+export * from "./inflect";

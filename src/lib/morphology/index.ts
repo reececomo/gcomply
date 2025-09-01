@@ -1,5 +1,5 @@
-import * as Grammar from "./grammar/index.js";
-import { Morphology } from "./Morphology.js";
+import * as Grammar from "./grammar/index";
+import { Morphology } from "./Morphology";
 
 export {
     Grammar,
