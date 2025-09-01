@@ -1,7 +1,7 @@
 {
   "name": "gcomply",
-  "version": "0.1.1",
-  "description": "Lightweight automatic grammar agreement engine for JavaScript/TypeScript",
+  "version": "0.2.0",
+  "description": "Lightweight automatic grammar agreement (AGA) for JavaScript/TypeScript",
   "author": "Reece Como <reece.como@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/reececomo/gxstring",
@@ -32,6 +32,7 @@
     "test": "jest --runInBand"
   },
   "dependencies": {
+    "@rollup/plugin-json": "^6.1.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^26.0.1",

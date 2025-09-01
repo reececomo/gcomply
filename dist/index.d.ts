@@ -577,6 +577,22 @@ export declare class TermOfAddress {
 	private constructor();
 }
 /**
+ * @example
+ *  g`You have ${count} new message.`
+ *
+ *  // becomes
+ *  "You have 2 new messages."
+ */
+export declare function g(raw: TemplateStringsArray, ...args: TextArgument[]): string;
+/**
+ * @example
+ *  inflect("You have 2 new message.")
+ *
+ *  // becomes
+ *  "You have 2 new messages."
+ */
+export declare function inflect(text: string, options?: GrammarOptions): string;
+/**
  * Indicates that the system uses the associated string for grammatical agreement when
  * localizing text.
  */
@@ -586,6 +602,10 @@ export declare function localizedPhrase(localizedPhrase: LocalizedPhraseValue): 
  * agreement when localizing text.
  */
 export declare function termsOfAddress(termsOfAddress: TermsOfAddressValue): TermsOfAddressConcept;
+export interface GrammarOptions {
+	language?: string;
+	morphology?: Morphology;
+}
 /**
  * Configuration options for the localization of text.
  */
@@ -656,6 +676,7 @@ export type TermsOfAddressConcept = {
 	termsOfAddress: TermsOfAddressValue;
 };
 export type TermsOfAddressValue = TermOfAddress[];
+export type TextArgument = string | number;
 export type ValueOf<T> = T[keyof T];
 
 declare namespace Grammar {
