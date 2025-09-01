@@ -1,3 +1,4 @@
+import { Grammar } from "../morphology";
 import { LanguagePluralTable } from "./LanguagePluralTable";
 import { PluralEntry } from "./PluralEntry";
 
@@ -8,6 +9,13 @@ class PluralManager
     public add(lang: string, ...data: PluralEntry[]): this
     {
         this.forLang(lang).add(...data);
+
+        return this;
+    }
+
+    public addTagged(lang: string, tag: Grammar.PartOfSpeech, ...data: PluralEntry[]): this
+    {
+        this.forLang(lang).addTagged(tag, ...data);
 
         return this;
     }

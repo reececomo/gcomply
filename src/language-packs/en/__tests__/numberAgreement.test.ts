@@ -1,3 +1,4 @@
+import { Grammar, Plurals } from "../../../lib";
 import { numberAgreement } from "../numberAgreement";
 
 describe( "numberAgreement", () =>
@@ -74,5 +75,15 @@ describe( "numberAgreement", () =>
     ])( '"%s" is corrected to "%s"', (input, expected) =>
     {
         expect(numberAgreement(input)).toEqual(expected);
+    });
+
+    test("custom cases", () =>
+    {
+        Plurals.addTagged("en", Grammar.PartOfSpeech.noun,
+            { one: "moose", other: "meese" },
+        );
+
+        expect(numberAgreement("I have 1 moose")).toEqual("I have 1 moose");
+        expect(numberAgreement("I have 2 moose")).toEqual("I have 2 meese");
     });
 });

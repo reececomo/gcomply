@@ -22,6 +22,7 @@ declare class LanguagePluralTable {
 declare class PluralManager {
 	private data;
 	add(lang: string, ...data: PluralEntry[]): this;
+	addTagged(lang: string, tag: Grammar.PartOfSpeech, ...data: PluralEntry[]): this;
 	forLang(lang: string): LanguagePluralTable;
 }
 declare const Definiteness: Codable<{

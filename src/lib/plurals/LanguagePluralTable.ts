@@ -134,17 +134,17 @@ export class LanguagePluralTable
 
     public add(...data: PluralEntry[]): this
     {
-        return  this.addTagged(undefined, ...data);
+        return this.addTagged(undefined, ...data);
     }
 
-    private lookup(value: string, excludePlurality?: SparseArray<string>): number
+    // ----- Private implementation: -----
+
+    private lookup(value: string): number
     {
         let i = -1;
 
         for (const table of this.tables)
         {
-            if (excludePlurality === table) continue;
-
             i = table.indexOf(value);
             if (i > -1) break;
         }

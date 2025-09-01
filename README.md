@@ -83,14 +83,12 @@ different problem.
 ### Add plurals
 
 ```ts
-import { Plurals } from "gcomply";
+import { Grammar, Plurals } from "gcomply";
 
-Plurals.getLang("en")
-  .add({ one: "tweet", other: "tweets" })
-  .add(...[
-    { one: "sausage", other: "sausages" },
-    { one: "twist", other: "twists" },
-  ]);
+Plurals.getLang("en").addTagged(Grammar.PartOfSpeech.noun,
+  { one: "sausage", other: "sausages" },
+  { one: "twist", other: "twists" },
+);
 ```
 
 ## ✨ Features
